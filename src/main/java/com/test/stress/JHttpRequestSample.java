@@ -3,15 +3,22 @@ package com.test.stress;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
+import org.slf4j.Logger;
 
-public class JRequestSample extends AbstractJavaSamplerClient {
+public class JHttpRequestSample extends AbstractJavaSamplerClient {
+
+//    @Override
+//    protected Logger getNewLogger() {
+//        return super.getNewLogger();
+//    }
+    Logger logger = super.getNewLogger();
 
     /**
      * Pre-test method. (Optional)
      * @param context
      */
     public void setupTest(JavaSamplerContext context) {
-        System.out.println("I'm in the setupTest !!!!! +++++");
+        logger.info("I'm in the setupTest !!!!! +++++");
     }
 
     /**
@@ -39,6 +46,12 @@ public class JRequestSample extends AbstractJavaSamplerClient {
         System.out.println("return success!!!!");
         System.out.println("the result response code = " + result.getResponseCode());
         result.sampleEnd();
+        logger.info("info logger");
+        logger.debug("debug logger");
         return result;
+    }
+
+    public static void main(String[] args) {
+        new JHttpRequestSample().runTest(null);
     }
 }
