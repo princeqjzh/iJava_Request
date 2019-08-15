@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<configuration debug="off" monitorInterval="1800">
+<configuration monitorInterval="1800" status="off">
 	<Properties>
 		<Property name="log-path">logs</Property>
 	</Properties>
@@ -8,54 +8,16 @@
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout
-                    pattern="%d{DEFAULT} %-5level %class{36}.%M()/%L  - %msg%xEx%n" />
+                    pattern="" />
 		</Console>
-
-		<File name="app_debug" fileName="${log-path}/debug.log"
-			append="true">
-			<Filters>
-				<ThresholdFilter level="info" onMatch="DENY"
-					onMismatch="NEUTRAL" />
-				<ThresholdFilter level="debug" onMatch="ACCEPT"
-					onMismatch="NEUTRAL" />
-			</Filters>
-			<PatternLayout
-				pattern="%d{yyyy.MM.dd HH:mm:ss} %-5level %class{36}.%M()/%L - %msg%xEx%n" />
-		</File>
-		<File name="app_info" fileName="${log-path}/info.log" append="true">
-			<Filters>
-				<ThresholdFilter level="warn" onMatch="DENY"
-					onMismatch="NEUTRAL" />
-				<ThresholdFilter level="info" onMatch="ACCEPT"
-					onMismatch="DENY" />
-			</Filters>
-
-			<PatternLayout
-				pattern="%d{yyyy.MM.dd HH:mm:ss} %-5level %class{36}.%M()/%L - %msg%xEx%n" />
-		</File>
-		<File name="app_error" fileName="${log-path}/error.log"
-			append="true">
-			<Filters>
-				<ThresholdFilter level="warn" onMatch="ACCEPT"
-					onMismatch="DENY" />
-			</Filters>
-			<PatternLayout
-				pattern="%d{yyyy.MM.dd HH:mm:ss} %-5level %class{36}.%M()/%L - %msg%xEx%n" />
-		</File>
 	</Appenders>
 	<Loggers>
-		<Logger name="com.test.app" level="debug" additivity="false">
+		<Logger name="com.test.stress" level="debug" additivity="false">
 			<appender-ref ref="Console" />
-			<appender-ref ref="app_debug" />
-			<appender-ref ref="app_info" />
-			<appender-ref ref="app_error" />
 		</Logger>
 		<root level="info">
 			<appender-ref ref="Console" />
 			<appender-ref ref="Console" />
-			<appender-ref ref="app_debug" />
-			<appender-ref ref="app_info" />
-			<appender-ref ref="app_error" />
 		</root>
 	</Loggers>
 </configuration>
