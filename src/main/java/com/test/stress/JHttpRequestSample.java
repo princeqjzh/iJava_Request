@@ -2,6 +2,7 @@ package com.test.stress;
 
 import com.test.common.HttpClient;
 import com.test.utils.JSONParaser;
+import com.test.utils.Tools;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
@@ -9,6 +10,10 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.threads.JMeterVariables;
 
 public class JHttpRequestSample extends AbstractJavaSamplerClient {
+    /**
+     * Get default parameter from the java request sampler.
+     * @return arguments
+     */
     @Override
     public Arguments getDefaultParameters() {
         Arguments params = new Arguments();
@@ -78,13 +83,20 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
     }
 
     public static void main(String[] args) {
-        String hostname = "localhost";
-        String port = "9091";
-        String username = "user01";
-        String password = "pwd";
-        boolean result = JHttpRequestSample.menuRestAPITest(hostname, port, username, password);
-        System.out.println(result);
+//        String hostname = "localhost";
+//        String port = "9091";
+//        String username = "user01";
+//        String password = "pwd";
+//        boolean result = JHttpRequestSample.menuRestAPITest(hostname, port, username, password);
+//        System.out.println(result);
 
+        String id = Tools.createIdcard();
+
+        String d = Tools.getCurrentTime();
+
+        System.out.println(id);
+
+        System.out.println(d);
     }
 
     public static boolean menuRestAPITest(String hostname, String port, String username, String password) {
