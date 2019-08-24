@@ -18,6 +18,7 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
     public Arguments getDefaultParameters() {
         Arguments params = new Arguments();
         params.addArgument("hostname","default_host");
+        params.addArgument("hostname_1","default_host");
         return params;
     }
 
@@ -65,7 +66,7 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         SampleResult sampleResult = new SampleResult();
         sampleResult.sampleStart();
         //运行接口测试组合代码，接口1 -> 接口4
-        boolean testResult = menuRestAPITest(hostname, port, username, password);
+        boolean testResult = menuRestfulAPITest(hostname, port, username, password);
         if (testResult) {
             sampleResult.setSuccessful(true); //设定成功条件下的Java Request 结果为成功
             String succMsg = "Menu restfulAPI test success.";
@@ -83,12 +84,12 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
     }
 
     public static void main(String[] args) {
-//        String hostname = "localhost";
-//        String port = "9091";
-//        String username = "user01";
-//        String password = "pwd";
-//        boolean result = JHttpRequestSample.menuRestAPITest(hostname, port, username, password);
-//        System.out.println(result);
+        String hostname = "localhost";
+        String port = "9091";
+        String username = "user01";
+        String password = "pwd";
+        boolean result = JHttpRequestSample.menuRestfulAPITest(hostname, port, username, password);
+        System.out.println(result);
 
         String id = Tools.createIdcard();
 
@@ -99,7 +100,7 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         System.out.println(d);
     }
 
-    public static boolean menuRestAPITest(String hostname, String port, String username, String password) {
+    public static boolean menuRestfulAPITest(String hostname, String port, String username, String password) {
         String protocal = "http";
         String access_token = "";
         boolean result = true;
