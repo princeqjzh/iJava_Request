@@ -18,7 +18,6 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
     public Arguments getDefaultParameters() {
         Arguments params = new Arguments();
         params.addArgument("hostname","default_host");
-        params.addArgument("hostname_1","default_host");
         return params;
     }
 
