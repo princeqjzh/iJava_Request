@@ -90,13 +90,13 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         boolean result = JHttpRequestSample.menuRestfulAPITest(hostname, port, username, password);
         System.out.println(result);
 
-        String id = Tools.createIdcard();
-
-        String d = Tools.getCurrentTime();
-
-        System.out.println(id);
-
-        System.out.println(d);
+//        String id = Tools.createIdcard();
+//
+//        String d = Tools.getCurrentTime();
+//
+//        System.out.println(id);
+//
+//        System.out.println(d);
     }
 
     public static boolean menuRestfulAPITest(String hostname, String port, String username, String password) {

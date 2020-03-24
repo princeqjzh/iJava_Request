@@ -6,12 +6,21 @@ import java.util.Random;
 
 public class Tools {
     public static void main(String[] args) {
-        int count = 100;
-        for (int i = 0; i < count; i++) {
-            String randomIp = getRandomIp();
-            System.err.println(randomIp);
-        }
-        System.currentTimeMillis();
+//        int count = 100;
+//        for (int i = 0; i < count; i++) {
+//            String randomIp = getRandomIp();
+//            System.err.println(randomIp);
+//        }
+//        System.currentTimeMillis();
+        String ts = "1688515200000";
+        System.out.println(Tools.long2date(ts));
+    }
+
+    public static String long2date(String milisecond){
+        long timestamp = new Long(milisecond).longValue();
+        Date date = new Date(timestamp);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat.format(date);
     }
 
     public static String getCurrentTime(){
