@@ -3,6 +3,8 @@ package com.test.utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Tools {
     public static void main(String[] args) {
@@ -12,8 +14,34 @@ public class Tools {
 //            System.err.println(randomIp);
 //        }
 //        System.currentTimeMillis();
-        String ts = "1688515200000";
-        System.out.println(Tools.long2date(ts));
+//        String ts = "1688515200000";
+//        System.out.println(Tools.long2date(ts));
+        String phoneString = "/Date(1718236800000)/";
+        System.out.println(Tools.getDateString(phoneString));
+//        String number = Tools.parseNumber(phoneString);
+//        System.out.println(Tools.long2date(number));
+        // 提取数字
+        // 1
+//        Pattern pattern = Pattern.compile("[^0-9]");
+//        Matcher matcher = pattern.matcher(phoneString);
+//        String all = matcher.replaceAll("");
+//        System.out.println("phone:" + all);
+        // 2
+//        Pattern.compile("[^0-9]").matcher(phoneString).replaceAll("");
+            new String().replaceAll("\u2028", "");
+
+    }
+
+    public static String getDateString(String oriStr){
+        String milSecond = parseNumber(oriStr);
+        return long2date(milSecond);
+    }
+
+    public static String parseNumber(String origStr){
+        Pattern pattern = Pattern.compile("[^0-9]");
+        Matcher matcher = pattern.matcher(origStr);
+        String number = matcher.replaceAll("");
+        return number;
     }
 
     public static String long2date(String milisecond){
