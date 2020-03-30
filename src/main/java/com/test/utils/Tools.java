@@ -8,50 +8,40 @@ import java.util.regex.Pattern;
 
 public class Tools {
     public static void main(String[] args) {
-//        int count = 100;
-//        for (int i = 0; i < count; i++) {
-//            String randomIp = getRandomIp();
-//            System.err.println(randomIp);
-//        }
-//        System.currentTimeMillis();
-//        String ts = "1688515200000";
-//        System.out.println(Tools.long2date(ts));
-        String phoneString = "/Date(1718236800000)/";
-        System.out.println(Tools.getDateString(phoneString));
-//        String number = Tools.parseNumber(phoneString);
-//        System.out.println(Tools.long2date(number));
-        // 提取数字
-        // 1
-//        Pattern pattern = Pattern.compile("[^0-9]");
-//        Matcher matcher = pattern.matcher(phoneString);
-//        String all = matcher.replaceAll("");
-//        System.out.println("phone:" + all);
-        // 2
-//        Pattern.compile("[^0-9]").matcher(phoneString).replaceAll("");
-            new String().replaceAll("\u2028", "");
+        System.out.println(Tools.genXCorID());
 
     }
 
-    public static String getDateString(String oriStr){
+    public static String genXCorID() {
+        return generateHexFour() + generateHexFour() + "-" + generateHexFour() + "-" + generateHexFour() + "-"
+                + generateHexFour() + "-" + generateHexFour() + generateHexFour() + generateHexFour();
+    }
+
+    public static String generateHexFour() {
+        String s = Double.toHexString(Math.floor((1 + Math.random()) * 0x10000)).replace("0x1.", "").replace("p16", "");
+        return s;
+    }
+
+    public static String getDateString(String oriStr) {
         String milSecond = parseNumber(oriStr);
         return long2date(milSecond);
     }
 
-    public static String parseNumber(String origStr){
+    public static String parseNumber(String origStr) {
         Pattern pattern = Pattern.compile("[^0-9]");
         Matcher matcher = pattern.matcher(origStr);
         String number = matcher.replaceAll("");
         return number;
     }
 
-    public static String long2date(String milisecond){
+    public static String long2date(String milisecond) {
         long timestamp = new Long(milisecond).longValue();
         Date date = new Date(timestamp);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.format(date);
     }
 
-    public static String getCurrentTime(){
+    public static String getCurrentTime() {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         return simpleDateFormat.format(date);
@@ -60,16 +50,16 @@ public class Tools {
     public static String getRandomIp() {
 
         // ip范围
-        int[][] range = { { 607649792, 608174079 }, // 36.56.0.0-36.63.255.255
-                { 1038614528, 1039007743 }, // 61.232.0.0-61.237.255.255
-                { 1783627776, 1784676351 }, // 106.80.0.0-106.95.255.255
-                { 2035023872, 2035154943 }, // 121.76.0.0-121.77.255.255
-                { 2078801920, 2079064063 }, // 123.232.0.0-123.235.255.255
-                { -1950089216, -1948778497 }, // 139.196.0.0-139.215.255.255
-                { -1425539072, -1425014785 }, // 171.8.0.0-171.15.255.255
-                { -1236271104, -1235419137 }, // 182.80.0.0-182.92.255.255
-                { -770113536, -768606209 }, // 210.25.0.0-210.47.255.255
-                { -569376768, -564133889 }, // 222.16.0.0-222.95.255.255
+        int[][] range = {{607649792, 608174079}, // 36.56.0.0-36.63.255.255
+                {1038614528, 1039007743}, // 61.232.0.0-61.237.255.255
+                {1783627776, 1784676351}, // 106.80.0.0-106.95.255.255
+                {2035023872, 2035154943}, // 121.76.0.0-121.77.255.255
+                {2078801920, 2079064063}, // 123.232.0.0-123.235.255.255
+                {-1950089216, -1948778497}, // 139.196.0.0-139.215.255.255
+                {-1425539072, -1425014785}, // 171.8.0.0-171.15.255.255
+                {-1236271104, -1235419137}, // 182.80.0.0-182.92.255.255
+                {-770113536, -768606209}, // 210.25.0.0-210.47.255.255
+                {-569376768, -564133889}, // 222.16.0.0-222.95.255.255
         };
 
         Random rdint = new Random();
