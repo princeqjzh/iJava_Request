@@ -2,7 +2,6 @@ package com.test.stress;
 
 import com.test.common.HttpClient;
 import com.test.utils.JSONParaser;
-import com.test.utils.Tools;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
@@ -82,23 +81,6 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         return sampleResult;
     }
 
-    public static void main(String[] args) {
-        String hostname = "localhost";
-        String port = "9091";
-        String username = "user01";
-        String password = "pwd";
-        boolean result = JHttpRequestSample.menuRestfulAPITest(hostname, port, username, password);
-        System.out.println(result);
-
-//        String id = Tools.createIdcard();
-//
-//        String d = Tools.getCurrentTime();
-//
-//        System.out.println(id);
-//
-//        System.out.println(d);
-    }
-
     public static boolean menuRestfulAPITest(String hostname, String port, String username, String password) {
         String protocal = "http";
         String access_token = "";
@@ -161,5 +143,14 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         }
 
         return result;
+    }
+
+    public static void main(String[] args) {
+        String hostname = "localhost";
+        String port = "9091";
+        String username = "user01";
+        String password = "pwd";
+        boolean result = JHttpRequestSample.menuRestfulAPITest(hostname, port, username, password);
+        System.out.println(result);
     }
 }

@@ -7,11 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Tools {
-    public static void main(String[] args) {
-        System.out.println(Tools.genXCorID());
-
-    }
-
     public static String genXCorID() {
         return generateHexFour() + generateHexFour() + "-" + generateHexFour() + "-" + generateHexFour() + "-"
                 + generateHexFour() + "-" + generateHexFour() + generateHexFour() + generateHexFour();
