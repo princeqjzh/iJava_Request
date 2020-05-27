@@ -89,20 +89,11 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         String password = "pwd";
         boolean result = JHttpRequestSample.menuRestfulAPITest(hostname, port, username, password);
         System.out.println(result);
-
-//        String id = Tools.createIdcard();
-//
-//        String d = Tools.getCurrentTime();
-//
-//        System.out.println(id);
-//
-//        System.out.println(d);
     }
 
     public static boolean menuRestfulAPITest(String hostname, String port, String username, String password) {
         String protocal = "http";
         String access_token = "";
-        boolean result = true;
 
         //接口1 登录操作
         String path1 = "/api/v1/user/login";
@@ -117,8 +108,10 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         access_token = JSONParaser.getJsonValue(respData1, "access_token");
         String retcode1 = JSONParaser.getJsonValue(respData1, "code");
         if (!"200".equalsIgnoreCase(retcode1)) {  //校验接口1的返回code是否等于200
-            result = false;
+            System.out.println("登录接口请求失败！");
+            return false;
         }
+        System.out.println("登录接口请求成功");
 
         //接口2 浏览菜单
         String path2 = "/api/v1/menu/list";
@@ -126,8 +119,10 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         String respData2 = HttpClient.sendGet(url2, access_token);
         String retcode2 = JSONParaser.getJsonValue(respData2, "code");
         if (!"200".equalsIgnoreCase(retcode2)) { //校验接口2的返回code是否等于200
-            result = false;
+            System.out.println("浏览菜单接口请求失败");
+            return false;
         }
+        System.out.println("浏览菜单接口请求成功");
 
         //接口3 下订单
         String path3 = "/api/v1/menu/confirm";
@@ -147,8 +142,10 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         String respData3 = HttpClient.sendPost(url3, reqData3, access_token);
         String retcode3 = JSONParaser.getJsonValue(respData3, "code");
         if (!"200".equalsIgnoreCase(retcode3)) { //校验接口3的返回code是否等于200
-            result = false;
+            System.out.println("下订单接口请求失败");
+            return false;
         }
+        System.out.println("下订单接口请求成功");
 
         //接口4 退出
         String path4 = "/api/v1/user/logout";
@@ -157,9 +154,11 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         String retcode4 = JSONParaser.getJsonValue(respData4, "code");
 
         if (!"200".equalsIgnoreCase(retcode4)) { //校验接口4的返回code是否等于200
-            result = false;
+            System.out.println("退出接口请求成功");
+            return false;
         }
+        System.out.println("退出接口请求成功");
 
-        return result;
+        return true;
     }
 }
