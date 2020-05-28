@@ -3,9 +3,9 @@ package com.test.utils;
 import org.json.JSONObject;
 
 
-public class JSONParaser {
+public class JSONParser {
     /**
-     * 解析Json内容
+     * Parser the json内容
      *
      * @param JsonString String
      * @param JsonId     String

@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class Tools {
     public static void main(String[] args) {
         System.out.println(Tools.genXCorID());
+        System.out.println(Tools.getDateString(new Long(System.currentTimeMillis()).toString()));
 
     }
 
@@ -22,8 +23,14 @@ public class Tools {
         return s;
     }
 
-    public static String getDateString(String oriStr) {
-        String milSecond = parseNumber(oriStr);
+    /**
+     * Millisecond string to date
+     *
+     * @param millisecond: Millisecond string of the time
+     * @return date: Date string of the time.
+     */
+    public static String getDateString(String millisecond) {
+        String milSecond = parseNumber(millisecond);
         return long2date(milSecond);
     }
 

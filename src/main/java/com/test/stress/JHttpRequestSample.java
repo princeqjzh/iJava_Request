@@ -1,8 +1,7 @@
 package com.test.stress;
 
 import com.test.common.HttpClient;
-import com.test.utils.JSONParaser;
-import com.test.utils.Tools;
+import com.test.utils.JSONParser;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
@@ -83,14 +82,23 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
     }
 
     public static void main(String[] args) {
+        //实验代码
         String hostname = "localhost";
         String port = "9091";
         String username = "user01";
         String password = "pwd";
         boolean result = JHttpRequestSample.menuRestfulAPITest(hostname, port, username, password);
-        System.out.println(result);
+        System.out.println("最终结果：" + result);
     }
 
+    /**
+     * 测试请求实际运行
+     * @param hostname: Host or IP
+     * @param port: 端口
+     * @param username: 用户名
+     * @param password: 密码
+     * @return
+     */
     public static boolean menuRestfulAPITest(String hostname, String port, String username, String password) {
         String protocal = "http";
         String access_token = "";
@@ -105,24 +113,24 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
                 "\t}\n" +
                 "}";
         String respData1 = HttpClient.sendPost(url1, reqData1, access_token);
-        access_token = JSONParaser.getJsonValue(respData1, "access_token");
-        String retcode1 = JSONParaser.getJsonValue(respData1, "code");
+        access_token = JSONParser.getJsonValue(respData1, "access_token");
+        String retcode1 = JSONParser.getJsonValue(respData1, "code");
         if (!"200".equalsIgnoreCase(retcode1)) {  //校验接口1的返回code是否等于200
-            System.out.println("登录接口请求失败！");
+            System.out.println("1. 登录接口请求失败！" + " return code = " + retcode1);
             return false;
         }
-        System.out.println("登录接口请求成功");
+        System.out.println("1. 登录接口请求成功");
 
         //接口2 浏览菜单
         String path2 = "/api/v1/menu/list";
         String url2 = protocal + "://" + hostname + ":" + port + path2;
         String respData2 = HttpClient.sendGet(url2, access_token);
-        String retcode2 = JSONParaser.getJsonValue(respData2, "code");
+        String retcode2 = JSONParser.getJsonValue(respData2, "code");
         if (!"200".equalsIgnoreCase(retcode2)) { //校验接口2的返回code是否等于200
-            System.out.println("浏览菜单接口请求失败");
+            System.out.println("2. 浏览菜单接口请求失败" + " return code = " + retcode2);
             return false;
         }
-        System.out.println("浏览菜单接口请求成功");
+        System.out.println("2. 浏览菜单接口请求成功");
 
         //接口3 下订单
         String path3 = "/api/v1/menu/confirm";
@@ -140,24 +148,24 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
                 "    ]\n" +
                 "}";
         String respData3 = HttpClient.sendPost(url3, reqData3, access_token);
-        String retcode3 = JSONParaser.getJsonValue(respData3, "code");
+        String retcode3 = JSONParser.getJsonValue(respData3, "code");
         if (!"200".equalsIgnoreCase(retcode3)) { //校验接口3的返回code是否等于200
-            System.out.println("下订单接口请求失败");
+            System.out.println("3. 下订单接口请求失败" + " return code = " + retcode3);
             return false;
         }
-        System.out.println("下订单接口请求成功");
+        System.out.println("3. 下订单接口请求成功");
 
         //接口4 退出
         String path4 = "/api/v1/user/logout";
         String url4 = protocal + "://" + hostname + ":" + port + path4;
         String respData4 = HttpClient.sendDelete(url4, access_token);
-        String retcode4 = JSONParaser.getJsonValue(respData4, "code");
+        String retcode4 = JSONParser.getJsonValue(respData4, "code");
 
         if (!"200".equalsIgnoreCase(retcode4)) { //校验接口4的返回code是否等于200
-            System.out.println("退出接口请求成功");
+            System.out.println("4. 退出接口请求成功" + " return code = " + retcode4);
             return false;
         }
-        System.out.println("退出接口请求成功");
+        System.out.println("4. 退出接口请求成功");
 
         return true;
     }
