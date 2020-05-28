@@ -30,16 +30,16 @@ public class HttpClient {
         String result = null;
 
         try {
-            httpClient = new SSLClient();
+            httpClient = new SSLClient(); //创建客户端client实例
             httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, waitTime * 1000);
             httpGet = new HttpGet(url);
-            httpGet.setHeader("access_token", access_token);
+            httpGet.setHeader("access_token", access_token); //配置Header
 
-            HttpResponse response = httpClient.execute(httpGet);
+            HttpResponse response = httpClient.execute(httpGet); //执行get请求
             if (response != null) {
-                HttpEntity resEntity = response.getEntity();
+                HttpEntity resEntity = response.getEntity(); //获取响应实体
                 if (resEntity != null) {
-                    result = EntityUtils.toString(resEntity, charset);
+                    result = EntityUtils.toString(resEntity, charset); //解析响应实体内容
                 }
             }
         } catch (SocketTimeoutException ste) {
@@ -63,13 +63,19 @@ public class HttpClient {
             CloseableHttpClient httpclient = null;
             CloseableHttpResponse httpresponse = null;
             try {
-                httpclient = HttpClients.createDefault();
-                HttpPost httppost = new HttpPost(url);
+                httpclient = HttpClients.createDefault(); //创建HttpClient对象
+                HttpPost httppost = new HttpPost(url); //创建post请求对象
+
+                //配置post请求
                 StringEntity stringentity = new StringEntity(data,
                         ContentType.create(contentType, "UTF-8"));
                 httppost.setEntity(stringentity);
                 httppost.setHeader("access_token", access_token);
+
+                //执行post请求
                 httpresponse = httpclient.execute(httppost);
+
+                //获取post请求响应实体
                 response = EntityUtils
                         .toString(httpresponse.getEntity());
             } finally {
@@ -93,12 +99,12 @@ public class HttpClient {
             CloseableHttpClient httpclient = null;
             CloseableHttpResponse httpresponse = null;
             try {
-                httpclient = HttpClients.createDefault();
-                HttpDelete httpdelete = new HttpDelete(url);
-                httpdelete.setHeader("access_token", access_token);
-                httpresponse = httpclient.execute(httpdelete);
+                httpclient = HttpClients.createDefault(); //创建Client对象
+                HttpDelete httpdelete = new HttpDelete(url); //创建Delete请求
+                httpdelete.setHeader("access_token", access_token);//配置delete请求
+                httpresponse = httpclient.execute(httpdelete); //执行delete请求
                 response = EntityUtils
-                        .toString(httpresponse.getEntity());
+                        .toString(httpresponse.getEntity()); //获取响应返回实体
             } finally {
                 if (httpclient != null) {
                     httpclient.close();
