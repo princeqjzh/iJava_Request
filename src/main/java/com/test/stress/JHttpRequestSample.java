@@ -67,13 +67,13 @@ public class JHttpRequestSample extends AbstractJavaSamplerClient {
         boolean testResult = menuRestfulAPITest(hostname, port, username, password);
         if (testResult) {
             sampleResult.setSuccessful(true); //设定成功条件下的Java Request 结果为成功
-            String succMsg = "Menu restfulAPI test success.";
+            String succMsg = "OrderService restfulAPI test success.";
             sampleResult.setResponseData(succMsg.getBytes());
             System.out.println(succMsg);
 
         } else {
             sampleResult.setSuccessful(false); //设定成功条件下的Java Request 结果为失败
-            String failMsg = "Menu restfulAPI test failed.";
+            String failMsg = "OrderService restfulAPI test failed.";
             sampleResult.setResponseData(failMsg.getBytes());
             System.out.println(failMsg);
         }

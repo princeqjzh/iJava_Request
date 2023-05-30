@@ -12,9 +12,6 @@ import javax.net.ssl.X509TrustManager;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-/**
- * Created by jizhi.qian on 17/1/13.
- */
 public class SSLClient extends DefaultHttpClient {
     public SSLClient() throws Exception {
         super();

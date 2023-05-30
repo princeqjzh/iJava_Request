@@ -16,9 +16,6 @@ import org.apache.http.util.EntityUtils;
 
 import java.net.SocketTimeoutException;
 
-/**
- * Created by jizhi.qian on 2019/3/13.
- */
 public class HttpClient {
     private static int waitTime = 30; //30 秒超时
 
@@ -33,7 +30,7 @@ public class HttpClient {
             httpClient = new SSLClient(); //创建客户端client实例
             httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, waitTime * 1000);
             httpGet = new HttpGet(url);
-            httpGet.setHeader("access_token", access_token); //配置Header
+            httpGet.setHeader("accesstoken", access_token); //配置Header
 
             HttpResponse response = httpClient.execute(httpGet); //执行get请求
             if (response != null) {
@@ -70,7 +67,7 @@ public class HttpClient {
                 StringEntity stringentity = new StringEntity(data,
                         ContentType.create(contentType, "UTF-8"));
                 httppost.setEntity(stringentity);
-                httppost.setHeader("access_token", access_token);
+                httppost.setHeader("accesstoken", access_token);
 
                 //执行post请求
                 httpresponse = httpclient.execute(httppost);
@@ -101,7 +98,7 @@ public class HttpClient {
             try {
                 httpclient = HttpClients.createDefault(); //创建Client对象
                 HttpDelete httpdelete = new HttpDelete(url); //创建Delete请求
-                httpdelete.setHeader("access_token", access_token);//配置delete请求
+                httpdelete.setHeader("accesstoken", access_token);//配置delete请求
                 httpresponse = httpclient.execute(httpdelete); //执行delete请求
                 response = EntityUtils
                         .toString(httpresponse.getEntity()); //获取响应返回实体
